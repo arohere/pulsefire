@@ -53,16 +53,26 @@ function activate(context) {
 		// child process to run git checkout
 		const $branchname = 'user_task_' + $selected.id;
 		exec('git checkout -b ' + $branchname, (err, stdout, stderr) => {
+			console.log('New Branch Created');
+			console.log('Publishing Branch...');
+		});
+		exec('git push origin ' + $branchname, (err, stdout, stderr) => {
 			if(err) {
 				console.log(err);
 				return;
 			}
-			console.log(stdout);
-			console.log(stderr);
+			console.log('Published Branch');
+			console.log('Checking Out...')
+		});
+		exec('git checkout' + $branchname, (err, stdout, stderr) => {
+			if(err) {
+				console.log(err);
+				return;
+			}
+			vscode.window.showInformationMessage('Checked Out to Branch ' + $branchname);
 		});
 
 
-		vscode.window.showInformationMessage('Hello World from Pulsefire!');
 	});
 
 	context.subscriptions.push(disposable);
