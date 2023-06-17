@@ -68,6 +68,7 @@ function activate(context) {
 			vscode.window.showInformationMessage('Checked Out to Branch ' + $branchname);
 		});
 
+
 	});
 
 	context.subscriptions.push(disposable);
